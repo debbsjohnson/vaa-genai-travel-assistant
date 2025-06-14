@@ -43,6 +43,7 @@ You must adhere to the following conditions:
 ## ✅ Your Task
 
 Implement a `POST /travel-assistant` endpoint that:
+
 - Accepts a user travel query e.g. `"I'm looking for a beach destination in July"`.
 - Uses OpenAI to generate a structured response (e.g., recommended destination, reason, budget, tips).
 - Utilise real data in the seed files (e.g., hotels, flights, experiences) i.e. don't rely on AI knowledge.
@@ -67,3 +68,13 @@ Content-Type: application/json
 Please create and commit your code into a **public GitHub repository** and supply the link to the recruiter for review.
 
 Thanks for your time, we look forward to hearing from you!
+
+cp .env.example .env
+
+# paste your keys
+
+OPENAI*API_KEY=sk-proj-...
+OPENAI_PROJECT_ID=proj*...
+uvicorn --app-dir src travel_assistant.main:app --reload
+
+python scripts/smoke_test.py "Solo foodie trip to Asia in September"

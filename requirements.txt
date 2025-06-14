@@ -3,3 +3,6 @@ uvicorn
 openai
 pydantic
 python-dotenv
+pytest
+slowapi 
+python-multipart
