@@ -9,6 +9,8 @@ if str(SRC) not in sys.path:
 
 import pytest
 from travel_assistant.retrieval.catalogue_loader import load_json
+from fastapi.testclient import TestClient
+from travel_assistant.main import app
 
 
 @pytest.fixture(scope="session")
@@ -18,3 +20,11 @@ def seed_data():
         "flights": load_json("flight"),
         "experiences": load_json("experiences"),
     }
+
+
+# import pytest
+
+
+@pytest.fixture
+def client():
+    return TestClient(app)

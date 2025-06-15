@@ -18,3 +18,11 @@ def load_data():
         "flights": load_json("flight"),
         "experiences": load_json("experiences"),
     }
+
+
+def load_cities() -> set[str]:
+    cities = set()
+    for name in ["hotel", "flight", "experiences"]:
+        data = load_json(name)
+        cities.update({item["city"].lower() for item in data if "city" in item})
+    return cities

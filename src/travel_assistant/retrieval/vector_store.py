@@ -12,22 +12,11 @@ from travel_assistant.core.config import get_settings
 import math
 
 settings = get_settings()
-# client = OpenAI(api_key=settings.openai_api_key)
-
-# client = OpenAI()
 
 client = OpenAI(
     api_key=settings.openai_api_key.get_secret_value(),
     project=settings.openai_project_id,
 )
-
-
-# def embed_batch(texts: List[str]) -> List[List[float]]:
-#     """calls the OpenAI embeddings endpoint once for up to 2048 strings"""
-
-#     resp = client.embeddings.create(model=settings.embed_model, input=texts)
-
-#     return [d.embedding for d in resp.data]
 
 
 def embed_batch(texts: list[str], max_batch: int = 100) -> list[list[float]]:
@@ -99,23 +88,21 @@ class VectorStore:
         if self.index is None:  # Added null check
             raise RuntimeError("index not initialised")
 
-        # 1. embed query once
+        # embeds query once
         q_emb = embed_batch([query])[0]
 
-        # 2. fetch vectors for the subset rows
-        # ids = [r["__id"] for r in rows]
+        # fetches vectors for the subset rows
         ids = [self.meta.index(r) for r in rows]
-        # vecs = np.vstack([self.index.reconstruct(i) for i in ids])
         vecs = self.index.reconstruct_n(0, self.index.ntotal)
         sub = [vecs[i] for i in ids]
 
-        # 3. compute cosine distance (faiss index is L2; cosine is fine for demo)
+        # computes cosine distance ( because faiss index is L2; cosine is fine for demo)
         q = np.array([q_emb], dtype="float32")
-        dot = np.dot(vecs, q_emb)  # (n,) dot products
+        dot = np.dot(vecs, q_emb)
         nq = np.linalg.norm(q_emb)
         nv = np.linalg.norm(vecs, axis=1)
-        cosine = 1 - dot / (nv * nq + 1e-8)  # smaller is nearer
+        cosine = 1 - dot / (nv * nq + 1e-8)
 
-        # 4. rank & return top-k rows
+        # ranks & returns top-k rows
         ranked = sorted(zip(rows, cosine), key=lambda t: t[1])
         return [r for r, _ in ranked[:k]]

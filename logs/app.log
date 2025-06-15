@@ -1,0 +1,308 @@
+2025-06-14 21:25:59,475 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-39' coro=<AsyncClient.aclose() done, defined at /Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/streams/tls.py", line 216, in aclose
+    await self.transport_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1314, in aclose
+    self._transport.close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 1206, in close
+    super().close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 871, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 772, in call_soon
+    self._check_closed()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 519, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2025-06-14 21:25:59,484 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-40' coro=<AsyncClient.aclose() done, defined at /Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/streams/tls.py", line 216, in aclose
+    await self.transport_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1314, in aclose
+    self._transport.close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 1206, in close
+    super().close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 871, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 772, in call_soon
+    self._check_closed()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 519, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2025-06-14 21:25:59,485 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-41' coro=<AsyncClient.aclose() done, defined at /Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/streams/tls.py", line 216, in aclose
+    await self.transport_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1314, in aclose
+    self._transport.close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 1206, in close
+    super().close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 871, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 772, in call_soon
+    self._check_closed()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 519, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2025-06-14 21:25:59,485 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-42' coro=<AsyncClient.aclose() done, defined at /Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/streams/tls.py", line 216, in aclose
+    await self.transport_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1314, in aclose
+    self._transport.close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 1206, in close
+    super().close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 871, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 772, in call_soon
+    self._check_closed()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 519, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2025-06-14 21:25:59,486 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-43' coro=<AsyncClient.aclose() done, defined at /Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/streams/tls.py", line 216, in aclose
+    await self.transport_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1314, in aclose
+    self._transport.close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 1206, in close
+    super().close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 871, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 772, in call_soon
+    self._check_closed()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 519, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2025-06-14 21:26:04,961 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-52' coro=<AsyncClient.aclose() done, defined at /Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/streams/tls.py", line 216, in aclose
+    await self.transport_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1314, in aclose
+    self._transport.close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 1206, in close
+    super().close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 871, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 772, in call_soon
+    self._check_closed()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 519, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2025-06-14 21:55:17,885 - travel_assistant.llm.agent - WARNING - Invalid destination: Los Angeles
+2025-06-14 21:55:24,712 - travel_assistant.llm.agent - WARNING - Invalid destination: Paris
+2025-06-14 21:55:30,870 - travel_assistant.llm.agent - WARNING - Invalid destination: Los Angeles
+2025-06-14 21:55:30,871 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-21' coro=<AsyncClient.aclose() done, defined at /Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/streams/tls.py", line 216, in aclose
+    await self.transport_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1314, in aclose
+    self._transport.close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 1206, in close
+    super().close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 871, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 772, in call_soon
+    self._check_closed()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 519, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2025-06-14 21:55:36,998 - travel_assistant.llm.agent - WARNING - Invalid destination: Toronto
+2025-06-14 21:55:44,378 - travel_assistant.llm.agent - WARNING - Invalid destination: San Francisco
+2025-06-14 21:55:47,276 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-49' coro=<AsyncClient.aclose() done, defined at /Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/streams/tls.py", line 216, in aclose
+    await self.transport_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1314, in aclose
+    self._transport.close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 1206, in close
+    super().close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 871, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 772, in call_soon
+    self._check_closed()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 519, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2025-06-14 21:55:50,097 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-51' coro=<AsyncClient.aclose() done, defined at /Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/streams/tls.py", line 216, in aclose
+    await self.transport_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1314, in aclose
+    self._transport.close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 1206, in close
+    super().close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 871, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 772, in call_soon
+    self._check_closed()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 519, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2025-06-14 21:55:50,098 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-52' coro=<AsyncClient.aclose() done, defined at /Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py:1978> exception=RuntimeError('Event loop is closed')>
+Traceback (most recent call last):
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1985, in aclose
+    await self._transport.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 406, in aclose
+    await self._pool.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 353, in aclose
+    await self._close_connections(closing_connections)
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 345, in _close_connections
+    await connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 173, in aclose
+    await self._connection.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_async/http11.py", line 258, in aclose
+    await self._network_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 53, in aclose
+    await self._stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/streams/tls.py", line 216, in aclose
+    await self.transport_stream.aclose()
+  File "/Users/mac/vaa-genai-technical-test/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 1314, in aclose
+    self._transport.close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 1206, in close
+    super().close()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/selector_events.py", line 871, in close
+    self._loop.call_soon(self._call_connection_lost, None)
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 772, in call_soon
+    self._check_closed()
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/base_events.py", line 519, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+2025-06-14 21:55:53,892 - travel_assistant.llm.agent - WARNING - Invalid destination: Washington
+2025-06-14 21:56:10,860 - test - INFO - Test message
+2025-06-14 21:56:10,860 - test - INFO - Test message

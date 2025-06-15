@@ -1,4 +1,3 @@
-# api/deps.py
 from functools import lru_cache
 from travel_assistant.core.config import get_settings, Settings
 from travel_assistant.retrieval.vector_store import VectorStore

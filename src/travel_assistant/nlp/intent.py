@@ -1,14 +1,13 @@
-"""Very small helper to extract or choose destination + theme."""
+"""very small helper to extract or choose destination + theme."""
 
 import re, random, json
 from pathlib import Path
 from travel_assistant.core.config import get_settings
+from travel_assistant.retrieval import get_all_cities
 
+# LOAD EXPERIENCE ONCE
 
-# ── load experiences once ────────────────────────────────────────────
-# CAT_PATH = Path(__file__).resolve().parents[2] / "data" / "experiences_catalogue.json"
-
-PROJECT_ROOT = Path(__file__).resolve().parents[3]  # repo root
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 CAT_PATH = PROJECT_ROOT / "seed_data" / "experiences_catalogue.json"
 
 with CAT_PATH.open(encoding="utf-8") as f:
@@ -17,24 +16,40 @@ with CAT_PATH.open(encoding="utf-8") as f:
 CITIES = {row["city"] for row in EXPERIENCES}
 
 
-# ── helper functions ────────────────────────────────────────────────
-def parse(query: str) -> tuple[str | None, str | None]:
-    """Return (city, theme); either may be None."""
-    q = query.lower()
-    theme = next(
-        (t for t in ["foodie", "beach", "adventure", "culture", "luxury"] if t in q),
-        None,
-    )
-    for city in CITIES:
-        if re.search(rf"\b{re.escape(city.lower())}\b", q):
+# helper functions
+
+
+def parse(query: str):
+    """Very basic parser to extract a known city from the query, if any."""
+    cities = get_all_cities()
+    for city in cities:
+        if city.lower() in query.lower():
+            # found a city name in the query
+            theme = query.replace(city, "", 1).strip(
+                ",. "
+            )  # theme = query without the city
             return city, theme
-    return None, theme
+    return None, query  # no known city found
 
 
-def pick_city(theme: str | None) -> str:
-    """Choose a city; if theme given, prefer cities whose name contains it."""
-    themed = [c for c in CITIES if theme and theme in c.lower()]
-    pool = themed or sorted(CITIES)
-    if not pool:
-        raise RuntimeError("Catalogue contains no cities")
-    return random.choice(pool)  # or pool[0] for deterministic tests
+def pick_city(theme: str):
+    """Choose a fallback city from seed data based on theme keywords."""
+    all_cities = list(get_all_cities())
+    if not all_cities:
+        return None
+    theme_lower = (theme or "").lower()
+    # simple keyword-based picks:
+    if "asia" in theme_lower:
+        # prefer an Asian city if available
+        for preferred in ["Tokyo", "Delhi", "Singapore", "Hong Kong"]:
+            if preferred in all_cities:
+                return preferred
+    if "beach" in theme_lower or "summer" in theme_lower:
+        for preferred in ["Bridgetown", "Tampa", "Miami"]:
+            if preferred in all_cities:
+                return preferred  # bridgetown (Barbados) or any coastal city in seeds
+    if "mountain" in theme_lower:
+        if "Denver" in all_cities:
+            return "Denver"
+    # default to the first city in seed list as a fallback
+    return all_cities[0]

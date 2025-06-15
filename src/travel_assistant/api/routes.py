@@ -1,11 +1,14 @@
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Request, HTTPException
 from travel_assistant.models.schemas import TravelQuery, TravelAdvice
 from travel_assistant.api.deps import settings_dep
 from travel_assistant.core.config import Settings
 from travel_assistant.llm.agent import generate_advice
+from travel_assistant.core.guardrails import moderate_content
 from slowapi import Limiter
 from slowapi.util import get_remote_address
+import logging
 
+logger = logging.getLogger(__name__)
 router = APIRouter()
 limiter = Limiter(key_func=get_remote_address)
 
@@ -13,65 +16,44 @@ limiter = Limiter(key_func=get_remote_address)
 @router.post("/travel-assistant", response_model=TravelAdvice)
 @limiter.limit("10/minute")
 async def travel_assistant_endpoint(
-    request: Request,  # Required by slowapi
+    request: Request,
     query_in: TravelQuery,
     settings: Settings = Depends(settings_dep),
 ):
-    advice: TravelAdvice = await generate_advice(query_in.query, settings)
-    return advice
+    """
+    generate travel advice based on a natural language query.
 
+    args:
+        request: fastAPI request object
+        query_in: pydantic model with user query
+        settings: application settings with OpenAI credentials
 
-# from fastapi import APIRouter, Depends
-# from travel_assistant.api.deps import (
-#     settings_dep,
-#     hotels_store_dep,
-#     flights_store_dep,
-#     experiences_store_dep,
-# )
+    returns:
+        TravelAdvice: structured travel recommendation
 
-# from travel_assistant.core.config import Settings
-# from travel_assistant.api.deps import settings_dep
-# from travel_assistant.services.advisor import advisor
-# from travel_assistant.models.schemas import TravelQuery, TravelAdvice
+    raises:
+        HTTPException: if content is inappropriate or processing fails
+    """
+    try:
+        if moderate_content(query_in.query, settings):
+            logger.warning(f"Inappropriate content detected: {query_in.query}")
+            raise HTTPException(
+                status_code=400,
+                detail="Your query contains inappropriate content. Please modify your request.",
+            )
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Content moderation failed: {e}")
+        raise HTTPException(status_code=500, detail="Content moderation error")
 
-# router = APIRouter()
-
-
-# @router.post("/travel-assistant", response_model=TravelAdvice)
-# async def travel_assistant(
-#     query: TravelQuery,
-#     settings: Settings = Depends(settings_dep),
-#     hotels: VectorStore = Depends(hotels_store_dep),
-#     flights: VectorStore = Depends(flights_store_dep),
-#     experiences: VectorStore = Depends(experiences_store_dep),
-# ):
-#     return await advisor(query.query, settings, hotels, flights, experiences)
-
-# src/travel_assistant/api/routes.py
-# from fastapi import APIRouter, Depends
-# from travel_assistant.models.schemas import TravelQuery, TravelAdvice
-# from travel_assistant.api.deps import settings_dep
-# from travel_assistant.core.config import Settings
-
-# # from travel_assistant.services.advisor import get_travel_advice
-# from travel_assistant.llm.agent import generate_advice
-# from slowapi import Limiter
-# from slowapi.util import get_remote_address
-# from slowapi.errors import RateLimitExceeded
-
-
-# router = APIRouter()
-
-
-# limiter = Limiter(key_func=get_remote_address)
-
-
-# @router.post("/travel-assistant", response_model=TravelAdvice)
-# @limiter.limit("5/minute")
-# async def travel_assistant_endpoint(
-#     query_in: TravelQuery,
-#     settings: Settings = Depends(settings_dep),
-# ):
-#     # 1) Pass the raw query string to your service function
-#     advice: TravelAdvice = await generate_advice(query_in.query, settings)
-#     return advice
+    try:
+        advice: TravelAdvice = await generate_advice(query_in.query, settings)
+        logger.info(f"Generated advice for query: {query_in.query}")
+        return advice
+    except Exception as e:
+        logger.exception(f"Error processing query: {query_in.query}")
+        raise HTTPException(
+            status_code=500,
+            detail="We encountered an error processing your request. Please try again later.",
+        )
