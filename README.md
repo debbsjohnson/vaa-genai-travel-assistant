@@ -141,7 +141,8 @@ Output:
 
 ---
 
-Next Steps
+# Next Steps
+
 While the current agent fulfills its basic functionality of returning travel recommendations via OpenAI's Assistants API, there are several powerful and creative directions I’m eager to explore with more time and resources:
 
 - I’d love to restructure the assistant into a collaborative network of specialized agents—for example, one for travel logistics, another for culinary experiences, and a third for budgeting. Using LangGraph or similar agent orchestration frameworks would allow these agents to “negotiate” and converge on richer, more context-aware recommendations.
