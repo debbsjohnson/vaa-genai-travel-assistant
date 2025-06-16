@@ -28,6 +28,9 @@ wheels/
 *.egg
 MANIFEST
 logs/
+*.pyc
+*.sqlite3
+
 
 # Docker
 *.log
