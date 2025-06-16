@@ -71,7 +71,7 @@ http://localhost:8000/travel-assistant
 Example:
 
 ```bash
- { "query": "Where should I go for a solo foodie trip to USA in September?" }
+ { "query": "Where should I go for a solo foodie trip to Asia in September?" }
 ```
 
 Output:
