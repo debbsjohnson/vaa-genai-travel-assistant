@@ -1,80 +1,177 @@
 # VAA GenAI Technical Test — AI Travel Assistant
 
-Welcome to the technical assessment for an AI Software Developer role at VAA.  
-This test is designed to evaluate your Python, FastAPI, and prompt engineering skills using OpenAI's API and structured seed data.
+## Overview
+
+This is a lightweight GenAI travel assistant built using FastAPI, OpenAI’s Assistants API, and a custom semantic search layer. It takes user queries (e.g., “Where should I go for a solo foodie trip to Asia in September?”) and returns thoughtful destination advice by blending structured JSON data (hotels, flights, experiences) with LLM-backed reasoning.
 
 ---
 
-## 🧠 Objective
+# What’s Done So Far
 
-Build a GenAI-powered **Travel Assistant** that responds to natural language travel queries via an API.  
-You should use FastAPI, Pydantic, and OpenAI's GPT model to interpret queries and return structured, helpful travel advice.
+**Core Endpoint (POST /travel-assistant)**: Parses user queries, optionally auto-selects a city, and calls the LLM agent.
 
----
+**LLM Agent** : Uses `AsyncOpenAI` with function-calling to:
 
-## 📌 Requirements
+- Search hotels, flights, and experiences via seed-data-backed retrieval
 
-- Python 3.10+
-- FastAPI
-- OpenAI API Key
-- Pydantic
-- Seed data (provided as `.json`)
+- Return structured travel advice via a return_advice function
 
----
+- Implements retry and fallback logic for both API errors and test environments
 
-## 📋 Rules
+**Retrieval Layer**: Simple search functions over JSON seed data (with Faiss indexing for future scalability).
 
-You must adhere to the following conditions:
+**Schemas & Guardrails**: Pydantic models (TravelAdvice) ensure consistent response shapes; impossible destinations (e.g. Mars) are handled gracefully.
 
-- **Original Work**: The code must be your own work. If you have a strong case to use a small code snippet from someone else's work (e.g., a boilerplate function), it must be clearly commented and attributed to the original author.
-
-- **Testing**: You must include any unit tests you think are appropriate. Consider testing your API endpoints, data processing logic, and OpenAI integration.
-
-- **Evaluations**: Implement evaluation methods to assess your AI responses. Consider testing for accuracy, relevance, proper use of seed data (vs hallucination), response consistency, and guardrail effectiveness.
-
-- **Performance & Quality**: Give consideration to performance, security, and code quality. Your implementation should be production-ready.
-
-- **Code Standards**: Code must be clear, concise, and human readable. Simplicity is often key. We want to see your problem-solving approach and clean architecture.
-
-- **Focus on Implementation**: This is a test of your backend development and AI integration skills. We want to see what you can create with the core technologies.
+**Testing**: Comprehensive pytest coverage (14 passing tests) for agent logic, API routes, and evaluation harness.
 
 ---
 
-## ✅ Your Task
+# Getting Started
 
-Implement a `POST /travel-assistant` endpoint that:
+**Clone & Run Locally:**
 
-- Accepts a user travel query e.g. `"I'm looking for a beach destination in July"`.
-- Uses OpenAI to generate a structured response (e.g., recommended destination, reason, budget, tips).
-- Utilise real data in the seed files (e.g., hotels, flights, experiences) i.e. don't rely on AI knowledge.
-- Implement appropriate guardrails.
+```bash
+    git clone https://github.com/debbsjohnson/vaa-genai-travel-assistant.git
+    cd vaa-genai-travel-assistant`
+```
 
-### Example Request
+**Setup**
 
-```json
-POST /travel-assistant
-Content-Type: application/json
+```bash
+python -m venv .venv
+source .venv/bin/activate  # or .venv\Scripts\activate on windows
+pip install -r requirements.txt
+```
 
+**Env Setup:**
+Create a `.env` file in the root directory with:
+
+```bash
+OPENAI_API_KEY=sk-...
+OPENAI_PROJECT_ID=proj_...
+```
+
+**Run App:**
+I had some trouble with my OpenAI key, which was weird so i ran this before posting (just in case you have that issue too :)
+
+```bash
+source env
+```
+
+```bash
+uvicorn travel_assistant.main:app --reload
+```
+
+Then `POST` to:
+
+```bash
+http://localhost:8000/travel-assistant
+```
+
+Example:
+
+```bash
+ { "query": "Where should I go for a solo foodie trip to USA in September?" }
+```
+
+Output:
+
+```bash
 {
-  "query": "Where should I go for a solo foodie trip to Asia in September?"
+    "destination": "Mumbai",
+    "reason": "Mumbai is a vibrant city known for its diverse and rich culinary scene, making it an ideal destination for a foodie trip.",
+    "budget": "Moderate to High",
+    "tips": [
+        "Try the local street food like Vada Pav and Pav Bhaji.",
+        "Visit the famous Leopold Cafe for a mix of local and international flavors.",
+        "Explore the spice markets for a true taste of Indian spices.",
+        "Don't miss the seafood at the city's coastal restaurants.",
+        "Book your food tours in advance to secure a spot."
+    ],
+    "hotel": {
+        "name": "The Taj Mahal Palace & Tower",
+        "city": "Mumbai",
+        "price_per_night": 500.0,
+        "rating": 5.0
+    },
+    "flight": {
+        "airline": "Virgin Atlantic",
+        "from_airport": "LHR",
+        "to_airport": "MUM",
+        "price": 800.0,
+        "duration": "9H",
+        "date": "2023-09-15"
+    },
+    "experience": {
+        "name": "Local Food Tour",
+        "city": "mumbai",
+        "price": 50.0,
+        "duration": "3 hours"
+    }
 }
-
 ```
 
 ---
 
-## 📤 Supplying Your Code
+# What Works
 
-Please create and commit your code into a **public GitHub repository** and supply the link to the recruiter for review.
+- Full prompt/response pipeline via Assistants API
 
-Thanks for your time, we look forward to hearing from you!
+- JSON file ingestion (hotels, flights, experiences)
 
-cp .env.example .env
+- Vector search powered by FAISS + NumPy
 
-# paste your keys
+- Dynamic response generation (reasoning + tips)
 
-OPENAI*API_KEY=sk-proj-...
-OPENAI_PROJECT_ID=proj*...
-uvicorn --app-dir src travel_assistant.main:app --reload
+- Validated with 14/14 green tests
 
-python scripts/smoke_test.py "Solo foodie trip to Asia in September"
+- Logs + graceful fallback for failed completions
+
+---
+
+# Mistakes i made
+
+- I definitely overcomplicated some parts and overengineering too early: I built things like embedding support and a test harness before validating the core OpenAI pipeline. This cost time I could’ve spent refining the actual assistant.
+
+- I underestimated how tricky containerizing a multi-layer Python project would be. Pathing issues, dependency mismatches, and unclear context loading made the containerisation phase stressful.
+
+- I structured seed data access assuming a static file system layout, which didn’t translate cleanly into the container context. This blocked successful runs until adjusted.
+
+- The tool_call_ids required by OpenAI’s API were tricky to handle without a proper middleware layer or abstraction, which led to repeated failed requests when the assistant didn’t auto-resolve them.
+
+---
+
+Next Steps
+While the current agent fulfills its basic functionality of returning travel recommendations via OpenAI's Assistants API, there are several powerful and creative directions I’m eager to explore with more time and resources:
+
+- I’d love to restructure the assistant into a collaborative network of specialized agents—for example, one for travel logistics, another for culinary experiences, and a third for budgeting. Using LangGraph or similar agent orchestration frameworks would allow these agents to “negotiate” and converge on richer, more context-aware recommendations.
+
+- In future iterations, I'd integrate LangChain and a Retrieval-Augmented Generation (RAG) pipeline. This would allow the assistant to query external sources (e.g., Expedia APIs, flight aggregators, or even live news APIs for weather/conflict alerts) and inject live results into the assistant’s decision-making. Not only does this keep the assistant current, it also grounds it in reality—crucial for travel planning.
+
+- For maintainability and demonstration purposes, I'd wire up the system in LangFlow to allow stakeholders to visually experiment with prompt chains, tool usage, and decision logic. This also enables faster experimentation and onboarding of non-technical team members.
+
+- In future development, I’d introduce a lightweight reranker (likely trained on curated destination-vs-query pairs) to prioritize or reweight results more intelligently. This model could sit behind the primary generation layer, ensuring that the top recommendation always feels tailored and compelling.
+
+- I'd incorporate a user feedback mechanism to log and learn from rejected or highly-rated suggestions. Over time, this dataset would enable model refinement or fine-tuning, improving personalization and user satisfaction.
+
+- Given more time, I would abstract each tool (flight, hotel, experience search) into modular OpenAI tools and improve tool routing using robust prompt engineering. I also explored how OpenAI manages tool_call chaining via the tool_choice param, which would be a great next step.
+
+- I faced a few OpenAI tool_call errors during development. To tackle this, I consistently leaned on OpenAI’s API documentation, GitHub issues, and Azure’s model compatibility tables. If I had more time, I’d formalize a proper evaluation framework using pytest + evals and consider mocking LLM outputs using a shadow-mode setup during test runs.
+
+- Lastly, I’d secure secrets with GitHub Actions + Vault or Doppler and set up a full CI/CD pipeline to auto-deploy the agent on each successful push—enabling safe, traceable experimentation and smoother iteration cycles.
+
+---
+
+# Reflections
+
+This was easily one of the most engaging tasks I’ve worked on. The real challenge wasn’t just to “call OpenAI and respond,” but to carefully choreograph context, tools, and fallbacks in a way that feels coherent to users.
+
+I also realised partway through that I might have overcomplicated things—maybe out of excitement to “do it all properly.” There’s beauty in starting lean and iterating fast, and I plan to carry that lesson into future builds.
+
+Despite the frustrations (hello, docker 😅), I learned a lot—from managing environment config across dev/staging modes to the quirks of OpenAI’s new assistant framework.
+
+I think the next leap is moving from “an app that uses AI” to “an app designed around AI.” That’s where things get fun.
+
+Thanks for reading, and I hope this project gives a peek into how I build, think, and grow :D
+
+**Deborah Johnson**
