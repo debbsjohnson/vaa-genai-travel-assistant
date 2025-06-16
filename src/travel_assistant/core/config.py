@@ -11,11 +11,14 @@ from functools import lru_cache
 
 from pydantic_settings import BaseSettings
 from pydantic import Field, field_validator, SecretStr
-
+import os
 from typing import Literal
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+# PROJECT_ROOT = Path(__file__).resolve().parents[1]
+# SEED_DIR = PROJECT_ROOT / "seed_data"
+
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 SEED_DIR = PROJECT_ROOT / "seed_data"
 
 

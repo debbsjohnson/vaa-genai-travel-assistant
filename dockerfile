@@ -1,22 +1,23 @@
 FROM python:3.12-slim-bookworm
 
-# create non-root user
+# Create non-root user
 RUN groupadd -r appuser && useradd -r -g appuser appuser
 
 WORKDIR /app
 
-# Copy requirements first for caching
+# Install dependencies first for better caching
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# copy app files
-COPY . .
+# Copy only necessary directories
+COPY src ./src
+COPY seed_data ./seed_data
 
-# set ownership and switch user
+# Set permissions & switch user
 RUN chown -R appuser:appuser /app
 USER appuser
 
-# create log directory
+# Create log directory
 RUN mkdir -p /app/logs
 
 CMD ["uvicorn", "travel_assistant.main:app", "--host", "0.0.0.0", "--port", "80"]
