@@ -27,6 +27,10 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+logs/
+
+# Docker
+*.log
 
 # Virtual environment
 venv/
